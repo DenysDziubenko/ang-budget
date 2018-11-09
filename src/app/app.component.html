@@ -1,0 +1,19 @@
+<div class="footer">
+  <div class="ui-g">
+    <div class="ui-g-4"><h1>{{ title }}</h1></div>
+    <div class="ui-g-4"><h2 pTooltip="Click to logout" tooltipPosition="bottom" (click)="logout()" *ngIf="isLoggedIn(); else tempSignin">Logged in as {{getUserName()}}</h2></div>
+    <ng-template #tempSignin><h2 routerLink="/signin">Signin</h2></ng-template>
+    <div class="ui-g-4" >
+      <div *ngIf="isLoggedIn(); else tempSignup">
+        <h1>Date Range</h1>
+        <p-calendar [(ngModel)]="rangeDates" selectionMode="range" (onSelect)="onMonthChange($event)" dateFormat="yy/mm/dd"></p-calendar>
+      </div>
+    </div>
+    <ng-template #tempSignup><h2 routerLink="/signup">Signup</h2></ng-template>
+  </div>
+</div>
+<div *ngIf="isLoggedIn()" class="ui-g"><p-tabMenu [model]="menuItems"></p-tabMenu></div>
+<ng-template #error></ng-template>
+<app-spinner [display]="showSpinner" ></app-spinner>
+<router-outlet></router-outlet>
+

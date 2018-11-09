@@ -1,0 +1,10 @@
+{
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "package.json"
+  ],
+  "watch": ["backend/bin", "backend/models", "backend/routes"],
+  "ext": "js",
+  "exec": "node ./backend/bin/server.js"
+}

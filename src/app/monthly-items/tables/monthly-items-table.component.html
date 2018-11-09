@@ -1,0 +1,75 @@
+<p-table [columns]="cols" [value]="tableOptions.monthlyItems" selectionMode="single" [(selection)]="selectedMonthlyItem"
+         (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="5" >
+  <ng-template pTemplate="caption">{{tableOptions.caption}}</ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr><th *ngFor="let col of columns">{{col.header}}</th></tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData"><td *ngFor="let col of columns">{{rowData[col.field]}}</td></tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr><td [attr.colspan]="columns.length">{{emptymessage}}</td></tr>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <tr>
+      <td colspan="3">Total</td>
+      <td>{{tableOptions.getTotal()}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary" let-rowData>
+    <div style="text-align:left">
+      <button type="button" pButton icon="fa-plus" (click)="showDialogToAdd()" label={{tableOptions.addBtnLabel}}></button>
+    </div>
+  </ng-template>
+</p-table>
+
+<p-dialog header="{{(monthlyItem && monthlyItem._id) ? 'Item details' : 'New Item details'}}" [(visible)]="displayMonthlyItemDialog" [responsive]="true" [modal]="true" [width]="300">
+  <form #form="ngForm" (ngSubmit)="save()">
+    <div class="ui-g ui-fluid" *ngIf="monthlyItem">
+    <div class="ui-g-12">
+      <div class="ui-g-4" style="margin-top: .25em;">
+        <label for="name" >Name</label>
+      </div>
+      <div class="ui-g-8 form-group">
+        <input pInputText id="name" name="name" #name="ngModel" class="form-control" [(ngModel)]="monthlyItem.name"
+               pTooltip="{{name.errors | errors}}" autocomplete="off" required/>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4" style="margin-top: .25em;">
+        <label for="dueDate" >Date</label>
+      </div>
+      <div class="ui-g-8 form-group">
+        <input pInputText id="dueDate" name="dueDate" [valType]="'date'" #dueDate="ngModel" class="form-control" [(ngModel)]="monthlyItem.dueDate"
+               pTooltip="{{dueDate.errors | errors}}" autocomplete="off" required/>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4" style="margin-top: .25em;">
+        <label for="amount" >Amount</label>
+      </div>
+      <div class="ui-g-8 form-group">
+        <input pInputText type="number" min="0" step="10" id="amount" name="amount" class="form-control" [valType]="'posint'" #amount="ngModel"
+               [(ngModel)]="monthlyItem.amount" pTooltip="{{amount.errors | errors}}" required/>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-12">
+        <label for="description" >Description</label>
+      </div>
+      <div class="ui-g-12 form-group">
+        <textarea rows="5" cols="30" id="description" pInputTextarea name="description" class="form-control"
+                  [(ngModel)]="monthlyItem.description"></textarea>
+      </div>
+    </div>
+  </div>
+    <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete" [ngStyle]="{display: (monthlyItem && monthlyItem._id) ? '' : 'none'}"></button>
+      <button type="submit" pButton icon="fa-check" label="Save" [disabled]="form.invalid"></button>
+    </div>
+  </p-footer>
+  </form>
+</p-dialog>
+
+

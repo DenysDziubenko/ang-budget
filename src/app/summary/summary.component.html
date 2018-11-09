@@ -1,0 +1,30 @@
+<p-card [style]="{position: 'absolute', top: '30%', width: '90%', left: '5%'}" styleClass="ui-card-shadow">
+  <div class="ui-g">
+    <div class="ui-g-6">
+      <button pButton type="submit" label="Select current month, {{ currentMonth}}" class="ui-button-info" [disabled]="currentMonthSelected" (click)="onCurrentMonthMonthClick()"></button>
+    </div>
+    <div class="ui-g-6">
+      <button pButton type="submit" label="Select previous month, {{previousMonth}}" class="ui-button-info" [disabled]="previousMonthSelected" (click)="onPreviousMonthClick()"></button>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-6">
+      <p-chart type="pie" [data]="chartData"></p-chart>
+    </div>
+    <div class="ui-g-6">
+      <p-dataList [value]="summaryItems" [rows]="4">
+        <p-header>Summary of monthly items</p-header>
+        <ng-template let-item pTemplate="item">
+          <div class="ui-g ui-fluid monthly-item">
+            <div class="ui-g-12 ui-md-12 monthly-details">
+              <div class="ui-g">
+                <div class="ui-g-8 ui-sm-6">{{item.title}}</div>
+                <div class="ui-g-4 ui-sm-6">{{item.value}}</div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataList>
+    </div>
+  </div>
+</p-card>

@@ -1,0 +1,18 @@
+<p-card [style]="{position: 'absolute', top: '30%', width: '60%', left: '20%', lineHeight: '60px'}" styleClass="ui-card-shadow">
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input pInputText name="firstName" ngModel type="text" class="form-control" placeholder="First Name"  autocomplete="none" required>
+    </div>
+    <div class="form-group">
+      <input pInputText name="lastName" ngModel type="text" class="form-control" placeholder="Last Name"  autocomplete="none" required>
+    </div>
+    <div class="form-group">
+      <input pInputText name="email" #email="ngModel" ngModel [valType]="'email'" [maxLength]="30" pTooltip="{{email.errors | errors}}" tooltipEvent="focus"
+             type="email" class="form-control" placeholder="Email" autocomplete="off" required>
+    </div>
+    <div class="form-group">
+      <input pInputText pPassword name="password" ngModel type="password" class="form-control" placeholder="Password" required>
+    </div>
+    <button pButton [disabled]="form.invalid" type="submit" label="Submit" class="ui-button-info"></button>
+  </form>
+</p-card>

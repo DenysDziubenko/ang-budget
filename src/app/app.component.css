@@ -1,0 +1,14 @@
+.footer{
+  background: gray;
+}
+
+.footer h2 {
+  margin-bottom: 0;
+  margin-top: 20px;
+  outline: none;
+}
+
+.footer h2:hover {
+  color: white;
+  cursor: pointer;
+}
