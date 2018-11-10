@@ -16,4 +16,4 @@ The front-end(port 4200) and back-end(port 3000) servers would be running in tha
 Use `npm run start-prod` for running application in production mode.
 The back-end(port 3000) server would be running in that case.
 
-### [Website live example](https://warm-fjord-52483.herokuapp.com/)
+### [Website live example](https://angular-budget-app.herokuapp.com/)
